@@ -4,7 +4,16 @@
    \usepackage{url}
    \usepackage{amsmath}
    \usepackage{amsthm}
-   
+   \usepackage{paralist}
+   \usepackage[normalem]{ulem}
+
+\newcommand{\IF}{\text{ \underline{if} }}
+\newcommand{\THEN}{\text{ \underline{then} }}
+\newcommand{\ELSE}{\text{ \underline{else} }}
+
+\newcommand{\ITE}[3]{$\IF t_{#1} \THEN #2 \ELSE #3$}
+\newcommand{\ADD}[2]{$A_{#1} \THEN #2$}
+\newcommand{\SUB}[2]{$S_{#1} \THEN #2$}
    
 \title{Computability Theory: Exercise sheet 1}
 \author{Martin Kalany}
@@ -13,18 +22,62 @@
 \begin{document}
 \maketitle
 
-\section{Exercise 1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 1}
 
-\section{Exercise 2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 2}
 
-\section{Exercise 3}
+We define the program as $P=(1,A)$, where $A = \{$ 
+\begin{compactenum}[1:]
+\item \ITE{1}{4}{2} 
+\item \ADD{2}{3}
+\item \SUB{1}{1}
+\item \ADD{1}{5}
+\item \ITE{2}{0}{6}
+\item \SUB{2}{7}
+\item \ITE{3}{10}{8}
+\item \ADD{3}{9}
+\item \SUB{1}{7}
+\item \ITE{3}{5}{11}
+\item \ADD{1}{12}
+\item \ADD{1}{13}
+\item \SUB{3}{10}
 
-\section{Exercise 4}
+\end{compactenum}
+$\}$.
 
-\section{Exercise 5}
 
-\section{Exercise 6}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 3}
 
-\section{Exercise 7}
+$Func(P): f(x,y) = x*y$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 6}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\noindent
+\textbf{Exercise 7}
+
 
 \end{document}
