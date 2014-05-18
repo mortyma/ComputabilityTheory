@@ -1,4 +1,4 @@
-PROJECT = hw02
+PROJECT = computability_ex1.tex
 
 .PHONY: all clean
 
