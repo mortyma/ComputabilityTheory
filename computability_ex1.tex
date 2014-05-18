@@ -141,6 +141,23 @@ Since $P(x,y) \in Pred^{k+1}(F)$ and $F$ is closed under $\land$ resp.~$\lor$ (s
 \bigskip
 \noindent
 \textbf{Exercise 6:}
+For convencience, we define the function $max: \mathbb{N}^2 \rightarrow \mathbb{N}$ as:
+\begin{align*}
+max(x,y) = \begin{cases}
+           x & \text{ if } x > y \\
+           y & \text{ otherwise }
+           \end{cases}
+\end{align*}
+Since $>\; \in \PR$, it is immediate to see that $max$ is primitive recursive.
+We define $maxQ$ as
+\begin{align*}
+(maxQ)(x,0) &= 0 \\
+(maxQ)(x,y+1) &= max(Q(x,y+1) * (y+1), (maxQ)(x,y)) \\
+\implies (maxQ) &= Pr(C^1_0, C(max; C(times; C(Q; I^3_1, S \circ I^3_2), S \circ I^3_2) , I^3_3))
+\end{align*}
+
+Since $Q(x,y) \in Pred^{n+1}(\PR)$ and $\PR$ is closed under $max$ and $times$ (shown in Theorem 3.0.5) and all other functions and operators are basic ones, we conclude that $(maxQ) \in \PR$.
+\qed
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
