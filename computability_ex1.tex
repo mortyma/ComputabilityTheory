@@ -20,6 +20,9 @@
 \newcommand{\dI}[1]{\ensuremath{d_I \THEN #1}}
 \newcommand{\dB}[1]{\ensuremath{d_B \THEN #1}}
   
+\newcommand{\PR}{\textbf{PR}}
+\newcommand{\R}{\textbf{R}}
+  
 \title{Computability Theory: Exercise sheet 1}
 \author{Martin Kalany}
 \date{\today}
@@ -92,6 +95,28 @@ $Func(P): f(x,y) = x*y$
 \bigskip
 \noindent
 \textbf{Exercise 4:}
+Let $F \in \{\PR, \R\}$. 
+We assume that $f \in F$.
+Note that the semantics of the $\Sigma$ operator adhere to the following equation:
+\begin{align*}
+\Sigma(f)(x,0) &= f(x,0) \\
+\Sigma(f)(x, y+1) &= f(x,y+1) + \Sigma(f)(x,y)
+\end{align*}
+which we can rewrite as
+\begin{align*}
+\Sigma(f)(x,0) &= C(f; I^1, C^1_0)(x) \\
+\Sigma(f)(x, y+1) &= C(plus; C(f; I^3_1, S \circ I^3_2), I^3_3) (x,y, \Sigma(f)(x,y))
+\end{align*}
+Let $g = C(f; I^1, C^1_0)$ and $h = C(plus; C(f; I^3_1, S \circ I^3_2), I^3_3)$. 
+Since $g$ and $h$ only make use of the functions $f$ (which we assume to be a total function) and $plus$ (Example 3.0.4 showed that $plus \in cl_{Pr}(BF\cup S)$) as well as operators in $BF \cup S$, they are total functions.
+Thus, we can equivalently write $\Sigma(f) = Pr(g, h)$, i.e, $\Sigma(f) \in cl_{Pr}(BF \cup S)$. 
+We conclude that $\Sigma(f) \in \PR$ (immediate by the definition) and $\Sigma(f) \in \R$ (since $\Sigma(f) \in cl_{\{Pr \cup \mu \}}(BF \cup S)$ and total). 
+
+\medskip
+\noindent
+The proof for the operator $\Pi$ is analogous (just substitute $plus$ by $times$).
+\qed
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
@@ -108,5 +133,5 @@ $Func(P): f(x,y) = x*y$
 \noindent
 \textbf{Exercise 7:}
 
-
+ 
 \end{document}
