@@ -22,6 +22,9 @@
   
 \newcommand{\PR}{\textbf{PR}}
 \newcommand{\R}{\textbf{R}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
   
 \title{Computability Theory: Exercise sheet 1}
 \author{Martin Kalany}
@@ -163,6 +166,54 @@ Since $Q(x,y) \in Pred^{n+1}(\PR)$ and $\PR$ is closed under $max$ and $times$ (
 \bigskip
 \noindent
 \textbf{Exercise 7:}
+We define the function $min: \mathbb{N}^2 \rightarrow \mathbb{N}$ as 
+\begin{align*}
+min(x,y) = \begin{cases}
+           x & \text{ if } x < y \\
+           y & \text{ otherwise }
+           \end{cases}
+\end{align*}
+Since $PR$ is closed under $<$ and definition by cases, it is immediate to see that $min$ is primitive recursive.
+We define the bounded minimazation operator $\text{min}Q$ analogously to $\text{max}Q$: 
+Let $Q \in Pred^{n+1}(\PR)$ and 
+\begin{align*}
+(\text{min}Q)(x,0) &= 0 \\
+(\text{min}Q)(x,y+1) &= min(Q(x,y+1) * (y+1), (\text{min}Q)(x,y)) \\
+\implies (\text{min}Q) &= Pr(C^1_0, C(min; C(times; C(Q; I^3_1, S \circ I^3_2), S \circ I^3_2) , I^3_3))
+\end{align*}
+By the same arguments (just swap $min$ for $max$) as in Exercise 5, we conclude that $(\text{min}Q) \in \PR$. 
+Using the definition of the predicate $Prime$ from Example 3.0.12, we define the two-place predicate $pgt$ (prime and greater than) as
+\begin{align*}
+pgt(x,y) = x < y \land Prime(y) 
+\end{align*}
+which is trivially in $\PR$.
+\begin{theorem}[Bertrand-Tschebyschow]
+$\forall n\in \mathbb{N}, n > 1 : \exists p \text{ s.t.~}  n < p \leq 2n \land p \text{ is prime.}$
+\end{theorem}
 
- 
+\noindent
+Using the well known Theorem of Bertrand-Tschebyschow, we can define the function $nextp: \mathbb{N} \rightarrow \mathbb{N}$
+\begin{align*}
+nextp(x) &= 
+\begin{cases}
+  \text{min}\{k \mid x < k \land k \leq 2*x \land Prime(k) \} & \text{if }\exists(x < i \leq 2*x)\; Prime(x)\\
+  0 & \text{otherwise}
+\end{cases}
+\end{align*}
+(which computes the next prime greater than $x$) as
+\begin{align*}
+nextp(x) &= (\text{min}pgt)(x, 2*x)\\
+\implies nextp &= C((\text{min}pgt); I^1, C(times; C^1_2, I^1)) \quad .
+\end{align*}
+Since $nextp$ is a composition of $(\text{min}pgt)$ is a recursive predicate, the identity and constant function and $times \in \PR$, we can cconclude that $nextp \in \PR$.
+Finally, we get 
+\begin{align*}
+p(0) &= 1 \\
+p(y+1) &= nextp(p(y)) \\
+\implies p &=  Pr(nextp \circ I^2_2)
+\end{align*}
+which is trivially in $\PR$ (apart from $nextp$, only basic functions and the $Pr$ operators are used).
+\qed
+
+
 \end{document}
