@@ -122,6 +122,20 @@ The proof for the operator $\Pi$ is analogous (just substitute $plus$ by $times$
 \bigskip
 \noindent
 \textbf{Exercise 5:}
+Let $F \in \{\PR, \R\}$. 
+We define $P^a(x,k)$ and $P^e(x,k)$ via the $Pr$ operator:
+\begin{align*}
+P^a(x, 0) &= P(x,0) \\
+P^a(x, y+1) &= P(x,y+1) \land P^a(x,y) \\
+\implies P^a &= Pr(C(P; I^1, C^1_1),  C(\land; C(P; I^3_1, S \circ I^3_2), I^3_3) 
+\end{align*}
+\begin{align*}
+P^e(x, 0) &= P(x,0) \\
+P^e(x, y+1) &= P(x,y+1) \lor P^e(x,y) \\
+\implies P^e &= Pr(C(P; I^1, C^1_1),  C(\lor; C(P; I^3_1, S \circ I^3_2), I^3_3) 
+\end{align*}
+Since $P(x,y) \in Pred^{k+1}(F)$ and $F$ is closed under $\land$ resp.~$\lor$ (shown in Theorem 3.0.1) and all other functions and operators are basic ones, we conclude that $P^a(x,k),\; P^e(x,k) \in F$.
+\qed
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
