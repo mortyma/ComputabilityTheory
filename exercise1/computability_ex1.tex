@@ -130,12 +130,12 @@ We define $P^a(x,k)$ and $P^e(x,k)$ via the $Pr$ operator:
 \begin{align*}
 P^a(x, 0) &= P(x,0) \\
 P^a(x, y+1) &= P(x,y+1) \land P^a(x,y) \\
-\implies P^a &= Pr(C(P; I^1, C^1_1),  C(\land; C(P; I^3_1, S \circ I^3_2), I^3_3) 
+\implies P^a &= Pr(C(P; I^1, C^1_0),  C(\land; C(P; I^3_1, S \circ I^3_2), I^3_3) 
 \end{align*}
 \begin{align*}
 P^e(x, 0) &= P(x,0) \\
 P^e(x, y+1) &= P(x,y+1) \lor P^e(x,y) \\
-\implies P^e &= Pr(C(P; I^1, C^1_1),  C(\lor; C(P; I^3_1, S \circ I^3_2), I^3_3) 
+\implies P^e &= Pr(C(P; I^1, C^1_0),  C(\lor; C(P; I^3_1, S \circ I^3_2), I^3_3) 
 \end{align*}
 Since $P(x,y) \in Pred^{k+1}(F)$ and $F$ is closed under $\land$ resp.~$\lor$ (shown in Theorem 3.0.1) and all other functions and operators are basic ones, we conclude that $P^a(x,k),\; P^e(x,k) \in F$.
 \qed
@@ -151,7 +151,7 @@ max(x,y) = \begin{cases}
            y & \text{ otherwise }
            \end{cases}
 \end{align*}
-Since $PR$ is closed under $>$ and definition by cases, it is immediate to see that $max$ is primitive recursive.
+Since $\PR$ is closed under $>$ and definition by cases, it is immediate to see that $max$ is primitive recursive.
 We define $\text{max}Q$ as
 \begin{align*}
 (\text{max}Q)(x,0) &= 0 \\
@@ -174,7 +174,7 @@ min(x,y) = \begin{cases}
            \end{cases}
 \end{align*}
 Since $PR$ is closed under $<$ and definition by cases, it is immediate to see that $min$ is primitive recursive.
-We define the bounded minimazation operator $\text{min}Q$ analogously to $\text{max}Q$: 
+We define the bounded minimization operator $\text{min}Q$ analogously to $\text{max}Q$: 
 Let $Q \in Pred^{n+1}(\PR)$ and 
 \begin{align*}
 (\text{min}Q)(x,0) &= 0 \\
@@ -186,7 +186,7 @@ Using the definition of the predicate $Prime$ from Example 3.0.12, we define the
 \begin{align*}
 pgt(x,y) = x < y \land Prime(y) 
 \end{align*}
-which is trivially in $\PR$.
+which trivially is in $\PR$.
 \begin{theorem}[Bertrand-Tschebyschow]
 $\forall n\in \mathbb{N}, n > 1 : \exists p \text{ s.t.~}  n < p \leq 2n \land p \text{ is prime.}$
 \end{theorem}
@@ -205,14 +205,14 @@ nextp(x) &=
 nextp(x) &= (\text{min}pgt)(x, 2*x)\\
 \implies nextp &= C((\text{min}pgt); I^1, C(times; C^1_2, I^1)) \quad .
 \end{align*}
-Since $nextp$ is a composition of $(\text{min}pgt)$ is a recursive predicate, the identity and constant function and $times \in \PR$, we can cconclude that $nextp \in \PR$.
+Since $nextp$ is a composition of $(\text{min}pgt)$ (which is a primitive recursive predicate), the identity and constant function and $times$, we can cconclude that $nextp \in \PR$.
 Finally, we get 
 \begin{align*}
 p(0) &= 1 \\
 p(y+1) &= nextp(p(y)) \\
 \implies p &=  Pr(nextp \circ I^2_2)
 \end{align*}
-which is trivially in $\PR$ (apart from $nextp$, only basic functions and the $Pr$ operators are used).
+which is trivially in $\PR$ (since only $nextp \in \PR$, basic functions and the $Pr$ operator are used).
 \qed
 
 
