@@ -34,7 +34,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 2:} 
+\textbf{Exercise 2 a:} 
 We have to show that
 \begin{enumerate}[label={\alph*)}] 
  \item $A, B \in \E \implies A\cup B \in \E$ 
@@ -85,9 +85,16 @@ $$
 f_b(x) \text{ is defined } \iff \exists i,j \in \N: g(i) = x \land h(j) = x \quad ,
 $$
 i.e., $D(f_a) = A \cup B$ and $D(f_b) = A \cap B$.
-By the above definition, we get that $A\cup B \in \E$ and $A \cap B \in \E$. 
+By the above definition, we get that $A\cup B$ and $A \cap B$ are recursively enumerable and thus are in $\E$ (since $\E$ is the set of all recursively enumerable subsets of \N). 
 Thus $\E$ is closed under union and intersection. \qed
 
+\bigskip
+\noindent
+\textbf{Exercise 2 a:} 
+We have to show that the following does not hold:
+$$
+A \in \E \implies \overline{A} \in \E
+$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
