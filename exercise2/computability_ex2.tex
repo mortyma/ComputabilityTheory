@@ -14,6 +14,10 @@
 
 \newcommand{\E}{\ensuremath{\mathcal{E}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\PR}{\textbf{PR}}
+\newcommand{\R}{\textbf{R}}
+\renewcommand{\P}{\textbf{P}}
+\newcommand{\lra}{\ensuremath{\leftrightarrow}}
 
   
 \title{Computability Theory: Exercise sheet 2}
@@ -119,7 +123,45 @@ Thus, $K' \not \in \E$ and we conclude that $\E$ is not closed under complement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 5:}
+\textbf{Exercise 5:} Let $\varphi$ be a G\"odel numbering. Prove that the set $A:= \{x \mid (\forall y)\varphi(x,y) = \varphi(x+1,y)\}$ is not recursive.
+
+\noindent
+\textbf{Solution:} 
+Via reduction from the halting problem:
+We define the function $f$
+\begin{align*}
+ f(x,y) = \begin{cases}
+           \varphi(x+1,y) & \text{ if } x \in K \\
+           \text{undefined} & \text{ otherwise} 
+          \end{cases} \quad .
+\end{align*} 
+We can also define $f$ via the basic functions, basic operators and $\varphi$ as
+$$
+f(x,y) = C(I^2_1; C(\varphi; S \circ I^2_1, I^2_2), \mu_0 [\lambda x,k.T(x,x,k)]\circ I^2_1).
+$$
+Note that since $\varphi$ is a G\"odel numbering, $\varphi \in \P^2_1$ and thus $f \in \P$.
+Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R^1_1 \text{ s.t.\ } \varphi_{h(x)}(y) = f(x,y) \;\forall x,y$; thus
+$$
+\varphi_{h(x)}(y) = \begin{cases}
+           \varphi(x+1,y) & \text{ if } x \in K \\
+           \text{undefined} & \text{ otherwise}
+          \end{cases} \quad.
+$$
+Then,
+\begin{align*}
+x \in K &\lra \forall y: \varphi_{h(x)}(y) = \varphi(x+1,y) \lra \\
+&\lra \varphi_{h(x)}(0) = \varphi(x+1,0) \lra h(x) \in A \quad . 
+\end{align*}
+Let $B = \{z \mid \forall y: \varphi(z,y) =  \varphi(z+1,y)\}$ and assume that $B$ is a recursive set.
+Then, 
+$$
+\exists g \in \R^1_1 \text{ s.t.\ } g(z) \neq 0 \lra z \in B \lra \forall y: \varphi_z(y) = \varphi(z+1,y) \lra z \in A \quad ,
+$$
+and we get 
+$$
+x \in K \lra h(x) \in A \lra (g \circ h)(x) \neq 0 \quad .
+$$
+Since $g,h \in \R^1_1 \implies g\circ h \in \R^1_1$, the equivalence implies that $K$ is recursive - a contradiction, since $K$ is recursively enumberable, but not recursive (Theorem 5.1.1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
