@@ -117,10 +117,32 @@ Thus, $K \not \in \E$ and we conclude that $\E$ is not closed under complement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 3:}Let $\varphi$ be a G\"odel numbering and $T = \{ x \mid D(\varphi_x) = \N\}$ (the codes of all recursive functions). Proce that neither $T$ nor $\overline{T}$ are recursively enumberable.
+\textbf{Exercise 3:} Let $\varphi$ be a G\"odel numbering and $T = \{ x \mid D(\varphi_x) = \N\}$ (the codes of all recursive functions). Prove that neither $T$ nor $\overline{T}$ are recursively enumberable.
 
 \noindent
 \textbf{Solution:}
+We can rewrite $T$ as $T = \{ x \mid \forall y: \varphi_x(y) = 1 \}$, i.e., all $x$  for which $\varphi_x(y)$ is defined for all $y \in \N$.
+We define $f$ as 
+\begin{align*}
+ f(x,y) = \begin{cases}
+           1 & \text{ if } \neg T(x,x,y) \\
+           \text{undefined} &\text{ if } T(x,x,y)
+          \end{cases} \quad .
+\end{align*} 
+Note that $T \in Pred^3(\PR)$ and thus $f \in \PR$ (we only use $T$ and definition by cases to define $f$).
+Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in R_1^1 \text{ s.t.\ } \forall x,y :\varphi_{h(x)}(y) = f(x,y)$ and thus
+\begin{align*}
+\varphi_{h(x)}(y) = \begin{cases}
+           1 & \text{ if } \neg T(x,x,y) \\
+           \text{undefined} &\text{ if } T(x,x,y)
+          \end{cases} \quad .
+\end{align*} 
+We get the following equivalences:
+\begin{align*}
+x\in K \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = 1 \lra h(x) \in T \quad , 
+\end{align*}
+i.e., $\overline{K} \leq_m T$. 
+Since $\overline{K}$ is not recursively enumberable, neither is $T$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
