@@ -90,11 +90,21 @@ Thus $\E$ is closed under union and intersection. \qed
 
 \bigskip
 \noindent
-\textbf{Exercise 2 a:} 
-We have to show that the following does not hold:
+\textbf{Exercise 2 b:} 
+We have to show the following:
 $$
-A \in \E \implies \overline{A} \in \E
+A \in \E \not \Rightarrow \overline{A} \in \E
 $$
+We show that $K \in \E$, which (\textbf{Corollary 6.0.1}) will directly imply the above statement:
+$K$ is defined as $ K = \{x\mid (x,x) \in D(\varphi) \}$, where $\varphi$ is a universal function and $x \in \N^k$ for some $k \in \N$. 
+Note that $K$ is recursively enumerable.
+Using G\"odelization, we can define $K' = \{y \mid y = \langle x\rangle, x \in K \}$, for which $y \in \N$ and thus $K'\subseteq \N$ holds.
+Furthermore, $K'$ is cleary recursively enumerable and thus $K' \in \E$.
+Now assume that $\overline{K'}$ is recursively enumerable. 
+Then, $K$ is recursively enumberable too; a contradcition.
+Thus, $K' \not \in \E$ and we conclude that $\E$ is not closed under complement.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
