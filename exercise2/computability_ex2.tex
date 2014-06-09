@@ -100,13 +100,12 @@ $$
 A \in \E \not \Rightarrow \overline{A} \in \E
 $$
 We show that $K \in \E$, which (\textbf{Corollary 6.0.1}) will directly imply the above statement:
-$K$ is defined as $ K = \{x\mid (x,x) \in D(\varphi) \}$, where $\varphi$ is a universal function and $x \in \N^k$ for some $k \in \N$. 
-Note that $K$ is recursively enumerable.
+$K$ is defined as $ K = \{x\mid (x,x) \in D(\varphi) \}$, where $\varphi$ is a universal function and $x \in \N$. 
+Note that $K$ is recursively enumerable and that $K \subseteq \N$. 
 Using G\"odelization, we can define $K' = \{y \mid y = \langle x\rangle, x \in K \}$, for which $y \in \N$ and thus $K'\subseteq \N$ holds.
-Furthermore, $K'$ is cleary recursively enumerable and thus $K' \in \E$.
-Now assume that $\overline{K'}$ is recursively enumerable. 
-Then, $K$ is recursively enumberable too; a contradcition.
-Thus, $K' \not \in \E$ and we conclude that $\E$ is not closed under complement.
+Assume that the statement holds, i.e., that $\overline{K}$ is recursively enumerable. 
+This is a contradiction to Corollary 6.0.1.
+Thus, $K \not \in \E$ and we conclude that $\E$ is not closed under complement.
 
 
 
