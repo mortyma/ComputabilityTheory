@@ -33,7 +33,20 @@
 \textbf{Exercise 1:} Let $G \in R^1_1$ and $g$ be strictly monotone (increasing) (i.e., $g(/n) < g(n+1)$ for all $n$). Prove that $g(\N)$ is decidable.
 
 \noindent
-\textbf{Solution:}
+\textbf{Solution:} Let $G = \{x \mid x = g(n) \text{ for some } n\in \N\}$, i.e., $G = Range(g)$.
+To show that $G$ is decidable, we device a decision procedure $f$ that, for any $x\in \N$, answers the question \emph{Is $x \in G$?} with $yes$ ($f(x) = 1$) or $no$ ($f(x) = 0$) in finitly many steps.
+\begin{align*}
+& \text{\underline{function} } f(x): \\
+& \quad \text{\underline{begin}} \\
+& \quad \quad i \leftarrow 1; \\
+& \quad \quad \text{\underline{while} } (g(i) < x) \text{ \underline{do} } i \leftarrow i +1; \\
+& \quad \quad \text{\underline{if} } g(i) = x \text{ \underline{then} } f \leftarrow 1\\
+& \quad \quad \text{\underline{else} } f \leftarrow 0\\
+& \quad \text{\underline{end}}
+\end{align*}
+Note that the while-loop finds the minimum $i$ s.t.\ $g(i) \geq x$ holds, i.e., $i= min\{i \mid g(i) \geq x\}$. 
+Due to $g$ being structly monotone (increasing), $\forall j, i < j: g(i) < g(j)$ and thus $x\not \in \{g(i+1), g(i+2),\dots\}$.
+Thus we have $x\in G \lra x \in \{g(1),\dots,g(i)\}$. and we can simply check if $g(i) = x$ and return the answer.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
@@ -67,7 +80,7 @@ and define functions $f_a, f_b$ as:
 & \text{\underline{function} } f_a(x): \\
 & \quad \text{\underline{begin}} \\
 & \quad \quad i \leftarrow 1; \\
-& \quad \quad \text{\underline{while}} (g(i) \neq x \land h(i) \neq x) \\
+& \quad \quad \text{\underline{while} } (g(i) \neq x \land h(i) \neq x) \\
 & \quad \quad \quad \text{ \underline{do} } i \leftarrow i +1; \\
 & \quad \quad f_a \leftarrow 0; \\
 & \quad \text{\underline{end}}
@@ -76,9 +89,9 @@ and define functions $f_a, f_b$ as:
 & \text{\underline{function} } f_b(x): \\
 & \quad \text{\underline{begin}} \\
 & \quad \quad i \leftarrow 1; \\
-& \quad \quad \text{\underline{while}} (g(i) \neq x) \text{ \underline{do} } i \leftarrow i + 1; \\
+& \quad \quad \text{\underline{while} } (g(i) \neq x) \text{ \underline{do} } i \leftarrow i + 1; \\
 & \quad \quad j \leftarrow 1; \\
-& \quad \quad \text{\underline{while}} (h(j) \neq x) \text{ \underline{do} } j \leftarrow j + 1; \\
+& \quad \quad \text{\underline{while} } (h(j) \neq x) \text{ \underline{do} } j \leftarrow j + 1; \\
 & \quad \quad f_b \leftarrow 0; \\
 & \quad \text{\underline{end}}
 \end{align*}
