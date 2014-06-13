@@ -34,7 +34,7 @@
 
 \noindent
 \textbf{Solution:} Let $G = \{x \mid x = g(n) \text{ for some } n\in \N\}$, i.e., $G = Range(g)$.
-To show that $G$ is decidable, we device a decision procedure $f$ that, for any $x\in \N$, answers the question \emph{Is $x \in G$?} with $yes$ ($f(x) = 1$) or $no$ ($f(x) = 0$) in finitly many steps.
+To show that $G$ is decidable, we device a decision procedure $f$ that, for any $x\in \N$, answers the question \emph{Is $x \in G$?} with $yes$ ($f(x) = 1$) or $no$ ($f(x) = 0$) in finitely many steps.
 \begin{align*}
 & \text{\underline{function} } f(x): \\
 & \quad \text{\underline{begin}} \\
@@ -45,13 +45,13 @@ To show that $G$ is decidable, we device a decision procedure $f$ that, for any 
 & \quad \text{\underline{end}}
 \end{align*}
 Note that the while-loop finds the minimum $i$ s.t.\ $g(i) \geq x$ holds, i.e., $i= min\{i \mid g(i) \geq x\}$. 
-Due to $g$ being structly monotone (increasing), $\forall j, i < j: g(i) < g(j)$ and thus $x\not \in \{g(i+1), g(i+2),\dots\}$.
+Due to $g$ being strictly monotone (increasing), $\forall j, i < j: g(i) < g(j)$ and thus $x\not \in \{g(i+1), g(i+2),\dots\}$.
 Thus we have $x\in G \lra x \in \{g(1),\dots,g(i)\}$. and we can simply check if $g(i) = x$ and return the answer.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 2}  Let \E\ be the set of all recursively enumberable subsets of \N. Prove that 
+\textbf{Exercise 2}  Let \E\ be the set of all recursively enumerable subsets of \N. Prove that 
 \begin{enumerate}[label={\alph*)}] 
  \item \E\ is closed under union and intersection.
  \item \E\ is not closed under complement.
@@ -130,11 +130,11 @@ Thus, $K \not \in \E$ and we conclude that $\E$ is not closed under complement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 3:} Let $\varphi$ be a G\"odel numbering and $T = \{ x \mid D(\varphi_x) = \N\}$ (the codes of all recursive functions). Prove that neither $T$ nor $\overline{T}$ are recursively enumberable.
+\textbf{Exercise 3:} Let $\varphi$ be a G\"odel numbering and $T = \{ x \mid D(\varphi_x) = \N\}$ (the codes of all recursive functions). Prove that neither $T$ nor $\overline{T}$ are recursively enumerable.
 
 \noindent
 \textbf{Solution:}
-We can rewrite $T$ as $T = \{ x \mid \forall y: \varphi_x(y) = 1 \}$, i.e., all $x$  for which $\varphi_x(y)$ is defined for all $y \in \N$.
+We can rewrite $T$ as $T = \{ x \mid \forall y: \varphi_x(y) = 1 \}$, i.e., all $x$  where $\varphi_x(y)$ is defined for all $y \in \N$.
 We define $f$ as 
 \begin{align*}
  f(x,y) = \begin{cases}
@@ -143,7 +143,7 @@ We define $f$ as
           \end{cases} \quad .
 \end{align*} 
 Note that $T \in Pred^3(\PR)$ and thus $f \in \PR$ (we only use $T$ and definition by cases to define $f$).
-Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in R_1^1 \text{ s.t.\ } \forall x,y :\varphi_{h(x)}(y) = f(x,y)$ and thus
+Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R_1^1 \text{ s.t.\ } \forall x,y :\varphi_{h(x)}(y) = f(x,y)$ and thus
 \begin{align*}
 \varphi_{h(x)}(y) = \begin{cases}
            1 & \text{ if } \neg T(x,x,y) \\
@@ -152,15 +152,42 @@ Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in R_1^1 \text{
 \end{align*} 
 We get the following equivalences:
 \begin{align*}
-x\in K \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = 1 \lra h(x) \in T \quad , 
+x\in \overline{K} \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = 1 \lra h(x) \in T \quad , 
 \end{align*}
 i.e., $\overline{K} \leq_m T$. 
-Since $\overline{K}$ is not recursively enumberable, neither is $T$.
+Since $\overline{K}$ is not recursively enumerable, neither is $T$.
+
+We have $\overline{T} = \N\setminus T = \{x\mid x \not \in T \} = \{x\mid D(\varphi_x) \neq \N\} = \{x \mid \exists y \in \N: \varphi_x(y) = \text{undefined}\}$. 
+Let $S = \{x\mid \forall y\in \N: \varphi_x(y) = \text{undefined}\}$ and note that $S \subset \overline{T}$.
+We now show that $S$ is not recursively enumerable; because of $S \subset \overline{T}$, it follows directly that $\overline{T}$ is not recursively enumerable.
+The proof is analogous to the above:
+We define $f$ as 
+\begin{align*}
+ f(x,y) = \begin{cases}
+           \text{undefined} & \text{ if } \neg T(x,x,y) \\
+           1 &\text{ if } T(x,x,y)
+          \end{cases} \quad .
+\end{align*} 
+Note that $T \in Pred^3(\PR)$ and thus $f \in \PR$.
+Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R_1^1 \text{ s.t.\ } \forall x,y :\varphi_{h(x)}(y) = f(x,y)$ and thus
+\begin{align*}
+\varphi_{h(x)}(y) = \begin{cases}
+           \text{undefined} & \text{ if } \neg T(x,x,y) \\
+           1 &\text{ if } T(x,x,y)
+          \end{cases} \quad .
+\end{align*} 
+We get the following equivalences:
+\begin{align*}
+x\in \overline{K} \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = \text{undefined} \lra h(x) \in S \subset \underline{T} \quad , 
+\end{align*}
+i.e., $\overline{K} \leq_m S$. 
+Since $\overline{K}$ is not recursively enumerable, neither is $S$.
+Since $S \subset \overline{T}$, $\overline{T}$ is not recursively enumerable.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 4:} Let $\varphi$ be a G\"odel numbering and $AEQ = \{(x,y) \mid \varphi_x = \varphi_y \}$ (the equivalence problem for programs). Show that $AEQ$ is not recursively enumberable.
+\textbf{Exercise 4:} Let $\varphi$ be a G\"odel numbering and $AEQ = \{(x,y) \mid \varphi_x = \varphi_y \}$ (the equivalence problem for programs). Show that $AEQ$ is not recursively enumerable.
 
 \noindent
 \textbf{Solution:}
@@ -206,7 +233,7 @@ and we get
 $$
 x \in K \lra h(x) \in A \lra (g \circ h)(x) \neq 0 \quad .
 $$
-Since $g,h \in \R^1_1 \implies g\circ h \in \R^1_1$, the equivalence implies that $K$ is recursive - a contradiction, since $K$ is recursively enumberable, but not recursive (Theorem 5.1.1).
+Since $g,h \in \R^1_1 \implies g\circ h \in \R^1_1$, the equivalence implies that $K$ is recursive - a contradiction, since $K$ is recursively enumerable, but not recursive (Theorem 5.1.1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
