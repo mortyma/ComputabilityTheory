@@ -30,7 +30,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
 \noindent
-\textbf{Exercise 1:} Let $G \in R^1_1$ and $g$ be strictly monotone (increasing) (i.e., $g(/n) < g(n+1)$ for all $n$). Prove that $g(\N)$ is decidable.
+\textbf{Exercise 1:} Let $G \in R^1_1$ and $g$ be strictly monotone (increasing) (i.e., $g(n) < g(n+1)$ for all $n$). Prove that $g(\N)$ is decidable.
 
 \noindent
 \textbf{Solution:} Let $G = \{x \mid x = g(n) \text{ for some } n\in \N\}$, i.e., $G = Range(g)$.
@@ -45,8 +45,8 @@ To show that $G$ is decidable, we device a decision procedure $f$ that, for any 
 & \quad \text{\underline{end}}
 \end{align*}
 Note that the while-loop finds the minimum $i$ s.t.\ $g(i) \geq x$ holds, i.e., $i= min\{i \mid g(i) \geq x\}$. 
-Due to $g$ being strictly monotone (increasing), $\forall j, i < j: g(i) < g(j)$ and thus $x\not \in \{g(i+1), g(i+2),\dots\}$.
-Thus we have $x\in G \lra x \in \{g(1),\dots,g(i)\}$. and we can simply check if $g(i) = x$ and return the answer.
+Due to $g$ being strictly monotone (increasing), $\forall j \text{ s.t.\ } j < i: g(j) < g(i) \leq x$, while $\forall j \text{ s.t.\ } i < j: x \leq g(i) < g(j)$ and thus $x \not \in \{g(1),\dots, g(i-1) \}$ and $x\not \in \{g(i+1), g(i+2),\dots\}$.
+Thus we have $x\in G \lra x = g(i)$, i.e., we can simply check if $g(i) = x$ and return the answer.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
@@ -117,13 +117,12 @@ We have to show the following:
 $$
 A \in \E \not \Rightarrow \overline{A} \in \E
 $$
-We show that $K \in \E$, which (\textbf{Corollary 6.0.1}) will directly imply the above statement:
+We show that $K \in \E$, which (by \textbf{Corollary 6.0.1}) will directly imply the above statement:
 $K$ is defined as $ K = \{x\mid (x,x) \in D(\varphi) \}$, where $\varphi$ is a universal function and $x \in \N$. 
 Note that $K$ is recursively enumerable and that $K \subseteq \N$. 
-Using G\"odelization, we can define $K' = \{y \mid y = \langle x\rangle, x \in K \}$, for which $y \in \N$ and thus $K'\subseteq \N$ holds.
 Assume that the statement holds, i.e., that $\overline{K}$ is recursively enumerable. 
 This is a contradiction to Corollary 6.0.1.
-Thus, $K \not \in \E$ and we conclude that $\E$ is not closed under complement.
+Thus, $\overline{K}$ is not recursively enumerable, $\overline{K} \not \in \E$ and we conclude that $\E$ is not closed under complement.
 
 
 
@@ -134,7 +133,8 @@ Thus, $K \not \in \E$ and we conclude that $\E$ is not closed under complement.
 
 \noindent
 \textbf{Solution:}
-We can rewrite $T$ as $T = \{ x \mid \forall y: \varphi_x(y) = 1 \}$, i.e., all $x$  where $\varphi_x(y)$ is defined for all $y \in \N$.
+We can rewrite $T$ as $T = \{ x \mid \forall y \exists z\in\N: \varphi_x(y) = z \}$.
+Let $S = \{x \mid \forall y: \varphi_x(y) = 1 \}$ and note that $S\subset T$.
 We define $f$ as 
 \begin{align*}
  f(x,y) = \begin{cases}
@@ -152,15 +152,15 @@ Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R_1^1 \text
 \end{align*} 
 We get the following equivalences:
 \begin{align*}
-x\in \overline{K} \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = 1 \lra h(x) \in T \quad , 
+x\in \overline{K} \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = 1 \lra h(x) \in S \quad , 
 \end{align*}
-i.e., $\overline{K} \leq_m T$. 
-Since $\overline{K}$ is not recursively enumerable, neither is $T$.
+i.e., $\overline{K} \leq_m S$. 
+Since $\overline{K}$ is not recursively enumerable and $S \subset T$, neither are  $S$ or $T$.
 
 We have $\overline{T} = \N\setminus T = \{x\mid x \not \in T \} = \{x\mid D(\varphi_x) \neq \N\} = \{x \mid \exists y \in \N: \varphi_x(y) = \text{undefined}\}$. 
 Let $S = \{x\mid \forall y\in \N: \varphi_x(y) = \text{undefined}\}$ and note that $S \subset \overline{T}$.
 We now show that $S$ is not recursively enumerable; because of $S \subset \overline{T}$, it follows directly that $\overline{T}$ is not recursively enumerable.
-The proof is analogous to the above:
+The reduction is analogous to the above:
 We define $f$ as 
 \begin{align*}
  f(x,y) = \begin{cases}
@@ -178,7 +178,7 @@ Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R_1^1 \text
 \end{align*} 
 We get the following equivalences:
 \begin{align*}
-x\in \overline{K} \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = \text{undefined} \lra h(x) \in S \subset \underline{T} \quad , 
+x\in \overline{K} \lra \forall y: \neg T(x,x,y) \lra \forall y: \varphi_{h(x)}(y) = \text{undefined} \lra h(x) \in S \quad , 
 \end{align*}
 i.e., $\overline{K} \leq_m S$. 
 Since $\overline{K}$ is not recursively enumerable, neither is $S$.
@@ -192,7 +192,7 @@ Since $S \subset \overline{T}$, $\overline{T}$ is not recursively enumerable.
 \noindent
 \textbf{Solution:}
 Let $S_y = \{ (x,y) \mid \varphi_x = f \}$, where $f = \varphi_y$ and note that $\forall y\in \N: S_y \subset AEQ$.
-By the theorem of Rice,  $S_y$ is not recursively enumerable; it follows directly that $AEQ$ is not recursively enumerable.
+By the theorem of Rice (and in particular, the applications listed on page 82 of the script),  $S_y$ is not recursively enumerable; it follows directly that $AEQ$ is not recursively enumerable.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
@@ -214,7 +214,7 @@ $$
 f(x,y) = C(I^2_1; C(\varphi; S \circ I^2_1, I^2_2), \mu_0 [\lambda x,k.T(x,x,k)]\circ I^2_1).
 $$
 Note that since $\varphi$ is a G\"odel numbering, $\varphi \in \P^2_1$ and thus $f \in \P$.
-Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R^1_1 \text{ s.t.\ } \varphi_{h(x)}(y) = f(x,y) \;\forall x,y$; thus
+Since $\varphi$ is a G\"odel numbering, we know that $\exists h \in \R^1_1 \text{ s.t.\ } \forall x,y:\varphi_{h(x)}(y) = f(x,y)$; thus
 $$
 \varphi_{h(x)}(y) = \begin{cases}
            \varphi(x+1,y) & \text{ if } x \in K \\
@@ -223,8 +223,7 @@ $$
 $$
 Then,
 \begin{align*}
-x \in K &\lra \forall y: \varphi_{h(x)}(y) = \varphi(x+1,y) \lra \\
-&\lra \varphi_{h(x)}(0) = \varphi(x+1,0) \lra h(x) \in A \quad . 
+x \in K &\lra \forall y: \varphi_{h(x)}(y) = \varphi(x+1,y) \lra h(x) \in A \quad . 
 \end{align*}
 Let $B = \{z \mid \forall y: \varphi(z,y) =  \varphi(z+1,y)\}$ and assume that $B$ is a recursive set.
 Then, 
